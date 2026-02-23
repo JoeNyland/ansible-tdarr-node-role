@@ -1,0 +1,7 @@
+---
+tdarr_node_binary_url: https://storage.tdarr.io/versions/2.58.02/linux_x64/Tdarr_Node.zip
+tdarr_node_install_dir: /opt/tdarr_node
+tdarr_node_user: tdarr
+tdarr_node_group: tdarr
+tdarr_node_service_enabled: true
+tdarr_node_service_state: started

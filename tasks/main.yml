@@ -1,0 +1,40 @@
+---
+- tags:
+    - tdarr
+    - tdarr_node
+  block:
+    - name: Create install directory
+      file:
+        path: "{{ tdarr_node_install_dir }}"
+        state: directory
+        owner: "{{ tdarr_node_user }}"
+        group: "{{ tdarr_node_group }}"
+        mode: '0755'
+    - name: Create node subdirectory
+      file:
+        path: "{{ tdarr_node_install_dir }}/node"
+        state: directory
+        owner: "{{ tdarr_node_user }}"
+        group: "{{ tdarr_node_group }}"
+        mode: '0755'
+    - name: Download the binary zip file and unzip it
+      unarchive:
+        src: "{{ tdarr_node_binary_url }}"
+        dest: "{{ tdarr_node_install_dir }}/node"
+        remote_src: yes
+        owner: "{{ tdarr_node_user }}"
+        group: "{{ tdarr_node_group }}"
+        mode: '0755'
+      notify: Restart Tdarr Node
+    - name: Create a systemd service file
+      template:
+        src: tdarr-node.service.j2
+        dest: /etc/systemd/system/tdarr-node.service
+      notify:
+        - Reload systemd
+        - Restart Tdarr Node
+    - name: Enable and start the Tdarr Node service
+      systemd:
+        name: tdarr-node
+        enabled: "{{ tdarr_node_service_enabled }}"
+        state: "{{ tdarr_node_service_state }}"

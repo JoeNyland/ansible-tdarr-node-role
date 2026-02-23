@@ -1,0 +1,9 @@
+---
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+- name: Restart Tdarr Node
+  systemd:
+    name: tdarr-node
+    state: restarted
+  when: tdarr_node_service_enabled and tdarr_node_service_state == "started"

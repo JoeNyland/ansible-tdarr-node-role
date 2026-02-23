@@ -1,0 +1,16 @@
+[Unit]
+Description=Tdarr Node Service
+After=syslog.target network.target
+
+[Service]
+User={{ tdarr_node_user }}
+Group={{ tdarr_node_group }}
+Type=simple
+WorkingDirectory={{ tdarr_node_install_dir }}/node
+ExecStart={{ tdarr_node_install_dir }}/node/Tdarr_Node
+TimeoutStopSec=20
+KillMode=process
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
