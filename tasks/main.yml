@@ -17,6 +17,9 @@
         owner: "{{ tdarr_node_user }}"
         group: "{{ tdarr_node_group }}"
         mode: '0755'
+    - name: Install unzip
+      apt:
+        name: unzip
     - name: Download the binary zip file and unzip it
       unarchive:
         src: "{{ tdarr_node_binary_url }}"
