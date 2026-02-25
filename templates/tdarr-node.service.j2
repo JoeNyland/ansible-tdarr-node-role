@@ -6,6 +6,7 @@ After=syslog.target network.target
 User={{ tdarr_node_user }}
 Group={{ tdarr_node_group }}
 Type=simple
+Environment=NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 WorkingDirectory={{ tdarr_node_install_dir }}/node
 ExecStart={{ tdarr_node_install_dir }}/node/Tdarr_Node
 TimeoutStopSec=20
