@@ -28,6 +28,7 @@
         owner: "{{ tdarr_node_user }}"
         group: "{{ tdarr_node_group }}"
         mode: '0755'
+        creates: "{{ tdarr_node_install_dir }}/node/Tdarr_Node"
       notify: Restart Tdarr Node
     - name: Create a systemd service file
       template:
